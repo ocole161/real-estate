@@ -1,4 +1,6 @@
 class PropertiesController < ApplicationController
+    before_action :authorized_user
+    
     def index
         render json: Property.all
     end

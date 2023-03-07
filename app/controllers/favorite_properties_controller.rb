@@ -1,4 +1,6 @@
 class FavoritePropertiesController < ApplicationController
+    before_action :authorized_user
+
     def index
         render json: FavoriteProperty.all
     end

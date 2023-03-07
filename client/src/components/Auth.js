@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-function Auth({setCurrentUser}) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [login, setLogin] = useState("");
+function Auth({updateUser}) {
+    const [formData, setFormData] = useState({
+        username:'',
+        password:''
+    })
+    const [errors, setErrors] = useState([])
+    const navigate = useNavigate();
+
+    const {username, password} = formData;
 
     function onSubmit(e) {
         e.preventDefault()
@@ -12,7 +17,7 @@ function Auth({setCurrentUser}) {
             username,
             password
         }
-        fetch(`/users`, {
+        fetch(`/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -21,12 +26,20 @@ function Auth({setCurrentUser}) {
         })
         .then(res => {
             if(res.ok) {
-                res.json().then(setCurrentUser)
+                res.json().then(user => {
+                    updateUser(user)
+                    navigate("/")
+                })
             } else {
-                res.json().then( e => setErrors(e.error))
+                res.json().then(json => setErrors(json.error))
             }
         })
     }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+      }
 
     return (
         <>
@@ -34,20 +47,32 @@ function Auth({setCurrentUser}) {
                 <label>
                     Username
                     <br />
-                    <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                    <input 
+                        type="text" 
+                        name="username" 
+                        value={username} 
+                        onChange={handleChange}
+                        required />
                 </label>
                 <br />
                 <label>
                     Password
                     <br />
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input 
+                        type="password" 
+                        name="password" 
+                        value={password} 
+                        onChange={handleChange}
+                        required />
                 </label>
                 <br />
-                <input type="submit" value="Login" onClick={()=> setLogin(true)} />
-                <a href="/signup">"
-                    <button>Create Account</button>
-                </a>
-            </form></>
+                <input type="submit" value="Login" />
+            </form>
+            <a href="/users/new">
+                <button>Create Account</button>
+            </a>
+            {errors?<h2>{errors}</h2>:null}
+        </>
     )
 }
 
