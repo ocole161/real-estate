@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
+    wrap_parameters format: []
     def index
         render json: User.all
+    end
+
+    def show
+        current_user = User.find(session[:user_id])
+        render json: current_user
     end
 
     def create
@@ -11,6 +17,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :email, :password, :phone)
+        params.permit(:username, :password_confirmation, :password, :email, :phone)
     end
 end
