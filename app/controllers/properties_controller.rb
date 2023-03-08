@@ -17,7 +17,7 @@ class PropertiesController < ApplicationController
     def update
         property = Property.find(params[:id])
         property.update!(property_params)
-        render json: property, status: :updated
+        render json: property, status: :ok
     end
 
     def destroy
@@ -29,6 +29,6 @@ class PropertiesController < ApplicationController
     private
 
     def property_params
-        [params.permit(:price, :address, :image_url, :beds, :baths, :sqft, :neighborhood)]
+        params.permit(:price, :address, :image_url, :beds, :baths, :sqft, :neighborhood)
     end
 end

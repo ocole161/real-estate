@@ -1,5 +1,4 @@
 
-
 function PropertyCard({ property, user, onDeleteProperty }) {
     
     const { image_url, price, address, beds, baths, sqft, neighborhood } = property;

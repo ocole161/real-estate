@@ -34,6 +34,7 @@ function CreateProperty ({ onCreateProperty }) {
         .then(r => r.json())
         .then(newProperty => {
             navigate("/admin");
+            window.alert("Property added!")
         })
     }
 

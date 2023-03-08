@@ -52,6 +52,11 @@ function App() {
     setProperties(updatedProperties)
 }
 
+  function onUpdateProperty(updatedProperty) {
+    const updatedProperties = properties.map(property => property.id === updatedProperty.id ? updatedProperty : property)
+    setProperties(updatedProperties)
+  }
+
   return (
     <div className="App">
       <Navigation updateUser={updateUser} user={user} />
@@ -62,7 +67,7 @@ function App() {
         <Route path='/users/:id' element={<UserPage user={user} properties={properties} favorites={favorites}/>} />
         <Route path='/admin' element={<AdminPage properties={properties} favorites={favorites} messages={messages}/>} />
         <Route path='/properties/new' element={<CreateProperty />} />
-        <Route path='/properties/update/:id' element={<UpdateProperty />} />
+        <Route path='/properties/update/:id' element={<UpdateProperty onUpdateProperty={onUpdateProperty}/>} />
       </Routes>
     </div>
   );
