@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
-    before_action :authorized_user
-    
+    before_action :authorized_user, only: [:create, :update, :destroy]
+
     def index
         render json: Property.all
     end

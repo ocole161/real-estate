@@ -53,7 +53,7 @@ function CreateAccount({updateUser}) {
                 </label>  
                 <input 
                     type='text' 
-                    name='name' 
+                    name='username' 
                     value={username} 
                     onChange={handleChange}
                     required />

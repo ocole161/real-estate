@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-    before_action :authorized_user
+    # before_action :authorized_user
     
     def index
         render json: Message.all

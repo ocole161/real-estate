@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-function Auth({updateUser}) {
+function Auth({ updateUser }) {
     const [formData, setFormData] = useState({
         username:'',
         password:''
@@ -27,8 +27,8 @@ function Auth({updateUser}) {
         .then(res => {
             if(res.ok) {
                 res.json().then(user => {
-                    updateUser(user)
                     navigate("/")
+                    updateUser(user)
                 })
             } else {
                 res.json().then(json => setErrors(json.error))
