@@ -1,4 +1,4 @@
-import {Navigate, useNavigate} from 'react-router-dom'
+
 
 function PropertyCard({ property, user, onDeleteProperty }) {
     
@@ -17,10 +17,6 @@ function PropertyCard({ property, user, onDeleteProperty }) {
             })
             .then(onDeleteProperty(property));
         }
-    }
-
-    function navigateUpdate() {
-        Navigate(`/properties/update/${property.id}`)
     }
 
     return (
