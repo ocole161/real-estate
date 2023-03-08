@@ -1,4 +1,4 @@
-function PropertyCard({ property, user }) {
+function PropertyCard({ property, user, onDeleteProperty }) {
     
     const { image_url, price, address, beds, baths, sqft, neighborhood } = property;
     
@@ -18,7 +18,7 @@ function PropertyCard({ property, user }) {
             <h3>Baths: {baths}</h3>
             <h3>Sqft: {sqft}</h3>
             <button>Favorite</button>
-            {user?.is_admin ? <button>Delete</button> : null}
+            {user?.is_admin ? <button onClick={onDeleteProperty}>Delete</button> : null}
         </div>
     );
 }

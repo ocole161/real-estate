@@ -1,8 +1,8 @@
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import PropertyList from "./PropertyList";
 
 function UserPage({ user }) {
-    const params = useParams();
+    // const params = useParams();
     // const { id } = params;
 
     return (

@@ -1,9 +1,10 @@
-function MessageCard () {
+function MessageCard ({ message }) {
+
     return (
-        <>
-        <div className="message-card">MessageCard</div>
-        
-        </>
+        <div className="message-card">
+            <h2>{message.user.username}: </h2>
+            <p>{message.body}</p>
+        </div>
     )
 }
 
