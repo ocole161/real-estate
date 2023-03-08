@@ -1,3 +1,5 @@
+import {Navigate, useNavigate} from 'react-router-dom'
+
 function PropertyCard({ property, user, onDeleteProperty }) {
     
     const { image_url, price, address, beds, baths, sqft, neighborhood } = property;
@@ -9,14 +11,16 @@ function PropertyCard({ property, user, onDeleteProperty }) {
       });
 
     function handleDeleteProperty() {
-        console.log("clicked");
-        console.log(property)
         if (window.confirm('Are you sure you want to delete this property?') === true) {
             fetch(`/properties/${property.id}`, {
                 method: 'DELETE',
             })
             .then(onDeleteProperty(property));
         }
+    }
+
+    function navigateUpdate() {
+        Navigate(`/properties/update/${property.id}`)
     }
 
     return (
@@ -29,6 +33,7 @@ function PropertyCard({ property, user, onDeleteProperty }) {
             <h3>Baths: {baths}</h3>
             <h3>Sqft: {sqft}</h3>
             <button>Favorite</button>
+            {user?.is_admin ? <a href={`/properties/update/${property.id}`}><button>Update</button></a> : null}
             {user?.is_admin ? <button onClick={handleDeleteProperty}>Delete</button> : null}
         </div>
     );

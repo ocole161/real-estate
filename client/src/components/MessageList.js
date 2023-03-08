@@ -4,7 +4,7 @@ function MessageList ({ messages, user }) {
 
     return (
         <>
-        <div>MessageList</div>
+        <h2>MessageList</h2>
         {messages?.map(message => <MessageCard key={message.id} message={message} user={user} />)}
         </>
     )

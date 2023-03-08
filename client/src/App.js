@@ -4,6 +4,8 @@ import AdminPage from './components/AdminPage';
 import Auth from './components/Auth';
 import CreateAccount from './components/CreateAccount';
 import UserPage from './components/UserPage';
+import UpdateProperty from './components/UpdateProperty';
+import CreateProperty from './components/CreateProperty';
 import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from'react';
 import './App.css';
@@ -59,6 +61,8 @@ function App() {
         <Route path='/users/new' element={<CreateAccount updateUser={updateUser} />} />
         <Route path='/users/:id' element={<UserPage user={user} properties={properties} favorites={favorites}/>} />
         <Route path='/admin' element={<AdminPage properties={properties} favorites={favorites} messages={messages}/>} />
+        <Route path='/properties/new' element={<CreateProperty />} />
+        <Route path='/properties/update/:id' element={<UpdateProperty />} />
       </Routes>
     </div>
   );
