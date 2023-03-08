@@ -8,6 +8,17 @@ function PropertyCard({ property, user, onDeleteProperty }) {
         maximumFractionDigits: 0,
       });
 
+    function handleDeleteProperty() {
+        console.log("clicked");
+        console.log(property)
+        if (window.confirm('Are you sure you want to delete this property?') === true) {
+            fetch(`/properties/${property.id}`, {
+                method: 'DELETE',
+            })
+            .then(onDeleteProperty(property));
+        }
+    }
+
     return (
         <div className="property-card">
             <img src={image_url} alt={address} className="card_image"/>
@@ -18,7 +29,7 @@ function PropertyCard({ property, user, onDeleteProperty }) {
             <h3>Baths: {baths}</h3>
             <h3>Sqft: {sqft}</h3>
             <button>Favorite</button>
-            {user?.is_admin ? <button onClick={onDeleteProperty}>Delete</button> : null}
+            {user?.is_admin ? <button onClick={handleDeleteProperty}>Delete</button> : null}
         </div>
     );
 }
