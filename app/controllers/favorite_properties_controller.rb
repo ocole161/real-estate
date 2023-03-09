@@ -10,6 +10,12 @@ class FavoritePropertiesController < ApplicationController
         render json: favorite_property, status: :created
     end
 
+    def destroy
+        favorite_property = FavoriteProperty.find(params[:id])
+        favorite_property.destroy
+        head :no_content
+    end
+
     private
 
     def favorite_property_params

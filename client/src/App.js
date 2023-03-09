@@ -48,7 +48,7 @@ function App() {
   }, [])
 
   function onDeleteProperty(deletedProperty) {
-    const updatedProperties = properties.filter(property => property.id!== deletedProperty.id)
+    const updatedProperties = properties.filter(property => property.id !== deletedProperty.id)
     setProperties(updatedProperties)
 }
 
@@ -61,7 +61,7 @@ function App() {
     <div className="App">
       <Navigation updateUser={updateUser} user={user} />
       <Routes>
-        <Route path="/" element={<Home user={user} properties={properties} favorites={favorites} onDeleteProperty={onDeleteProperty} />} />
+        <Route path="/" element={<Home user={user} properties={properties} favorites={favorites} onDeleteProperty={onDeleteProperty} updateUser={updateUser} />} />
         <Route path="/login" element={ <Auth updateUser={updateUser} user={user} /> } />
         <Route path='/users/new' element={<CreateAccount updateUser={updateUser} />} />
         <Route path='/users/:id' element={<UserPage user={user} properties={properties} favorites={favorites}/>} />

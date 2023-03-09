@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
     before_action :authorized_user, only: [:create]
+    wrap_parameters format: []
     
     def index
         render json: Message.all

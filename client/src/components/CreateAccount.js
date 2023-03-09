@@ -70,8 +70,8 @@ function CreateAccount({updateUser}) {
                 </label>
                 <input 
                     type='text' 
-                    name='email' 
-                    value={email} 
+                    name='phone' 
+                    value={phone} 
                     onChange={handleChange} />
                 <label>
                 Password
