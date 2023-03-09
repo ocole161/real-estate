@@ -92,6 +92,7 @@ function UpdateProperty({ onUpdateProperty }) {
                 </div>
                 <button type="submit" className="button">Update</button>
             </form>
+            {/* {errors?<h2>{errors}</h2>:null} */}
         </div>
     )
 }

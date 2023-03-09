@@ -74,6 +74,7 @@ function CreateProperty ({ onCreateProperty }) {
                 </div>
                 <button type="submit" className="button">Submit</button>
             </form>
+            {/* {errors?<h2>{errors}</h2>:null} */}
         </div>
 
     )

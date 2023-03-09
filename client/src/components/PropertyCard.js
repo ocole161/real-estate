@@ -10,11 +10,12 @@ function PropertyCard({ property, user, onDeleteProperty }) {
         maximumFractionDigits: 0,
       });
 
+    const [favorite, setFavorite] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
     const [formData, setFormData] = useState({
         body: "",
         property_id: property.id,
-        user_id: user.id,
+        user_id: user? user.id : "",
     });
 
     function handleDeleteProperty() {
@@ -47,6 +48,16 @@ function PropertyCard({ property, user, onDeleteProperty }) {
         window.alert("Message Sent!"))
     }
 
+    function handleFavoriteClick() {
+        setFavorite(true)
+        console.log("clicked")
+    }
+
+    function handleUnfavoriteClick() {
+        setFavorite(false)
+        console.log("clicked")
+    }
+
     return (
         <div className="property-card">
             <img src={image_url} alt={address} className="card_image"/>
@@ -56,7 +67,9 @@ function PropertyCard({ property, user, onDeleteProperty }) {
             <h3>Beds: {beds}</h3>
             <h3>Baths: {baths}</h3>
             <h3>Sqft: {sqft}</h3>
-            <button>Favorite</button>
+            {user? !favorite? 
+            <button onClick={handleFavoriteClick}>Favorite</button> 
+            : <button onClick={handleUnfavoriteClick}>Remove Favorite</button> : null}
             {messageOpen? 
             <form>
                 <textarea 
@@ -69,12 +82,14 @@ function PropertyCard({ property, user, onDeleteProperty }) {
                     onChange={handleChange} /> 
                     <br></br>
                 <input 
-                    type="submit"  
+                    type="submit"
                     onClick={handleMessageSubmit} />
-            </form>: null }
-            <button onClick={() => setMessageOpen(!messageOpen)}>{messageOpen ? "Cancel" : "Send Message to Agent"}</button>
+            </form> 
+            : null }
+            {user? <button onClick={() => setMessageOpen(!messageOpen)}>{messageOpen ? "Cancel" : "Send Message to Agent"}</button> : null}
             {user?.is_admin ? <a href={`/properties/update/${property.id}`}><button>Update</button></a> : null}
             {user?.is_admin ? <button onClick={handleDeleteProperty}>Delete</button> : null}
+            {/* {errors?<h2>{errors}</h2>:null} */}
         </div>
     );
 }
