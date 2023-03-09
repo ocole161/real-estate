@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router-dom'
+import header_img from '../assets/header_img.jpg'
 
 function Navigation({ updateUser, user }) {
 
@@ -18,6 +19,7 @@ function Navigation({ updateUser, user }) {
 
     return (
         <>
+            <img src={header_img} alt="logo"/>
             <a href="/"><button>Home</button> </a>
             <a href="/login"><button>Login</button> </a>
             <a href='/users/new'><button>Sign Up</button> </a>
