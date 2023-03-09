@@ -2,7 +2,7 @@ class FavoritePropertiesController < ApplicationController
     before_action :authorized_user, only: [:create]
     
     def index
-        render json: FavoriteProperty.all
+        render json: FavoriteProperty.all.order(created_at: :desc)
     end
 
     def create

@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     wrap_parameters format: []
     
     def index
-        render json: Message.all
+        render json: Message.all.order(created_at: :desc)
     end
 
     def create

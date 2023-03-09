@@ -72,8 +72,11 @@ function PropertyCard({ property, user, onDeleteProperty, updateUser }) {
         })
         .then(res => {
             if(res.ok) {
-                res.json()
-                .then(setFavorite(true))
+                fetch(`/users/${user.id}`)
+                .then(res => res.json())
+                .then(data =>
+                updateUser(data),
+                setFavorite(true))
             } else {
                 res.json().then(json => setErrors(json.error))
             }
@@ -82,15 +85,15 @@ function PropertyCard({ property, user, onDeleteProperty, updateUser }) {
 
     function handleUnfavoriteClick() {
         const unfavorite = (user?.favorite_properties.filter((f) => f.property_id === property.id))
-        fetch(`/favorite_properties/${unfavorite[0].id}`,{
+        fetch(`/favorite_properties/${unfavorite[0]?.id}`,{
             method: "DELETE",
         })
         .then(res => {
             if(res.ok) {
                 fetch(`/users/${user.id}`)
                 .then(res => res.json())
-                updateUser(user)
-                console.log(user)
+                .then(data =>
+                updateUser(data))
                 setFavorite(false)
             } else {
                 console.log(user)

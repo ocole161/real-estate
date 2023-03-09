@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 
-function Navigation({updateUser, user}) {
+function Navigation({ updateUser, user }) {
 
     const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ function Navigation({updateUser, user}) {
             <a href='/users/new'><button>Sign Up</button> </a>
             {user ? <a href={`/users/${user.id}`}><button>My Favorites</button> </a> : null}
             {user?.is_admin ? <a href='/admin'><button>Admin</button> </a> : null}
-            <button onClick={handleLogout}>Logout</button>
+            {user ? <button onClick={handleLogout}>Logout</button> : null}
             <p>Current User: {user ? user.username : "No User"}</p>
         </>
     )

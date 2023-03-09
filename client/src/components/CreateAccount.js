@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 
-function CreateAccount({updateUser}) {
+function CreateAccount({ updateUser }) {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
