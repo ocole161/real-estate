@@ -1,7 +1,8 @@
 function FavoriteCard( {address, user, created_at}) {
     return (
         <div className="favorite-card">
-            <h2>{user} liked the property at {address} on {created_at}</h2>
+            <h3>{user.username} liked the property at {address} on {created_at}</h3>
+            <p>Contact: {user.email} {user.phone}</p>
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 function PropertyCard({ property, user, onDeleteProperty }) {
     
@@ -9,6 +10,13 @@ function PropertyCard({ property, user, onDeleteProperty }) {
         maximumFractionDigits: 0,
       });
 
+    const [messageOpen, setMessageOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        body: "",
+        property_id: property.id,
+        user_id: user.id,
+    });
+
     function handleDeleteProperty() {
         if (window.confirm('Are you sure you want to delete this property?') === true) {
             fetch(`/properties/${property.id}`, {
@@ -16,6 +24,27 @@ function PropertyCard({ property, user, onDeleteProperty }) {
             })
             .then(onDeleteProperty(property));
         }
+    }
+
+    function handleChange(e) {
+        e.preventDefault()
+        const { name, value } = e.target
+        setFormData({...formData, [name]: value})
+    }
+
+    function handleMessageSubmit(e) {
+        e.preventDefault()
+        fetch("/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(r => r.json())
+        .then(
+        setMessageOpen(false),
+        window.alert("Message Sent!"))
     }
 
     return (
@@ -28,6 +57,22 @@ function PropertyCard({ property, user, onDeleteProperty }) {
             <h3>Baths: {baths}</h3>
             <h3>Sqft: {sqft}</h3>
             <button>Favorite</button>
+            {messageOpen? 
+            <form>
+                <textarea 
+                    id="body" 
+                    name="body" 
+                    rows="8" 
+                    cols="50" 
+                    type="text" 
+                    placeholder="Send Message to Agent Regarding this Property" 
+                    onChange={handleChange} /> 
+                    <br></br>
+                <input 
+                    type="submit"  
+                    onClick={handleMessageSubmit} />
+            </form>: null }
+            <button onClick={() => setMessageOpen(!messageOpen)}>{messageOpen ? "Cancel" : "Send Message to Agent"}</button>
             {user?.is_admin ? <a href={`/properties/update/${property.id}`}><button>Update</button></a> : null}
             {user?.is_admin ? <button onClick={handleDeleteProperty}>Delete</button> : null}
         </div>

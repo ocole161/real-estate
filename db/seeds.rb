@@ -22,8 +22,8 @@ messages = ["I love this place!", "Please send me more information about this pr
 )}
 
 # Create users
-    User.create(username: "test", password: "test", email: "test@example.com", phone: Faker::PhoneNumber.cell_phone, is_admin: false)
-    User.create(username: "admin", password: "admin", email: "admin@example.com", phone: Faker::PhoneNumber.cell_phone, is_admin: true)
+    User.create(username: "test", password: "t", email: "test@example.com", phone: Faker::PhoneNumber.cell_phone, is_admin: false)
+    User.create(username: "admin", password: "a", email: "admin@example.com", phone: Faker::PhoneNumber.cell_phone, is_admin: true)
 
 
 # Create messages
@@ -34,6 +34,8 @@ messages = ["I love this place!", "Please send me more information about this pr
 )}
 
 # Create likes
+5.times  {
 FavoriteProperty.create(property_id: Property.all.sample.id, user_id: User.first.id)
+}
 
 puts "Seeding finished!"
