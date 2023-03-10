@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 function CreateAccount({ updateUser }) {
     const [formData, setFormData] = useState({
@@ -46,45 +47,43 @@ function CreateAccount({ updateUser }) {
       }
     
     return (
-        <div>
+        <div className='form'>
             <form onSubmit={onSubmit}>
-                <label>
-                Username
-                </label>  
-                <input 
-                    type='text' 
-                    name='username' 
-                    value={username} 
-                    onChange={handleChange}
-                    required />
-                <label>
-                Email
-                </label>
-                <input 
-                    type='text' 
-                    name='email' 
-                    value={email} 
-                    onChange={handleChange} />
-                <label>
-                Phone Number
-                </label>
-                <input 
-                    type='text' 
-                    name='phone' 
-                    value={phone} 
-                    onChange={handleChange} />
-                <label>
-                Password
-                </label>
-                <input 
-                    type='password' 
-                    name='password' 
-                    value={password} 
-                    onChange={handleChange}
-                    required />
-                
-            
-                <input type='submit' value='Sign up!' />
+                <div className="form-group">
+                    <input 
+                        placeholder='Username (required)'
+                        type='text' 
+                        name='username' 
+                        value={username} 
+                        onChange={handleChange}
+                        required />
+                </div>
+                <div className="form-group">
+                    <input 
+                        placeholder='Email'
+                        type='text' 
+                        name='email' 
+                        value={email} 
+                        onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <input 
+                        placeholder='Phone Number'
+                        type='text' 
+                        name='phone' 
+                        value={phone} 
+                        onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <input 
+                        placeholder='Password (required)'
+                        type='password' 
+                        name='password' 
+                        value={password} 
+                        onChange={handleChange}
+                        required /><br></br>
+                </div>
+                <Button type='submit' size="sm" className='small-button'>Sign up!</Button>
             </form>
             {errors?<h2>{errors}</h2>:null}
         </div>

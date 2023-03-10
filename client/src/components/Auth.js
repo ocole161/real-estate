@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import Button from 'react-bootstrap/Button'
 
 function Auth({ updateUser }) {
     const [formData, setFormData] = useState({
@@ -66,10 +67,10 @@ function Auth({ updateUser }) {
                         required />
                 </label>
                 <br />
-                <input type="submit" value="Login" />
+                <Button className="small-button" size="sm" type="submit" value="Login" >Submit</Button>
             </form>
             <a href="/users/new">
-                <button>Create Account</button>
+                <Button className="small-button" size="sm" >Create Account</Button>
             </a>
             {errors?<h2>{errors}</h2>:null}
         </>

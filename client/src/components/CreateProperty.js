@@ -1,8 +1,10 @@
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 function CreateProperty ({ onCreateProperty }) {
     const navigate = useNavigate();
+    const [errors, setErrors] = useState([]);
 
     const [formData, setFormData] = useState({
         address: "",
@@ -31,10 +33,15 @@ function CreateProperty ({ onCreateProperty }) {
             },
             body: JSON.stringify(formData)
         })
-        .then(r => r.json())
-        .then(newProperty => {
-            navigate("/admin");
-            window.alert("Property added!")
+        .then(r => {
+            if(r.ok) {
+                r.json().then(
+                navigate("/admin"),
+                window.alert("Property added!")
+                )
+            } else {
+                r.json().then(json => setErrors(json.error))
+            }
         })
     }
 
@@ -72,9 +79,9 @@ function CreateProperty ({ onCreateProperty }) {
                 <div className="form-group">
                     <input type="url" id="image_url" name="image_url" placeholder="Image URL" value={image_url} onChange={handleChange} />
                 </div>
-                <button type="submit" className="button">Submit</button>
+                <Button type="submit" className="small-button">Submit</Button>
             </form>
-            {/* {errors?<h2>{errors}</h2>:null} */}
+            {errors?<h2>{errors}</h2>:null}
         </div>
 
     )

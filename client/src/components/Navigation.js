@@ -1,5 +1,8 @@
 import {useNavigate} from 'react-router-dom'
 import header_img from '../assets/header_img.jpg'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
 
 function Navigation({ updateUser, user }) {
 
@@ -18,16 +21,25 @@ function Navigation({ updateUser, user }) {
     }
 
     return (
-        <>
-            <img src={header_img} alt="logo"/>
-            <a href="/"><button>Home</button> </a>
-            <a href="/login"><button>Login</button> </a>
-            <a href='/users/new'><button>Sign Up</button> </a>
-            {user ? <a href={`/users/${user.id}`}><button>My Favorites</button> </a> : null}
-            {user?.is_admin ? <a href='/admin'><button>Admin</button> </a> : null}
-            {user ? <button onClick={handleLogout}>Logout</button> : null}
-            <p>Current User: {user ? user.username : "No User"}</p>
-        </>
+        <Navbar>
+            <Navbar.Brand href="/">
+                <img src={header_img} alt="logo" height="100" />
+            </Navbar.Brand>
+            <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/users/new">Sign Up</Nav.Link>
+                        {user ? <Nav.Link href={`/users/${user?.id}`}>My Favorites</Nav.Link> : null}
+                        {user?.is_admin ? <Nav.Link href="/admin">Admin</Nav.Link> : null}
+                        {user ? <Nav.Link onClick={handleLogout}>Logout</Nav.Link> : null}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+            <Navbar.Text>Current User: {user ? user.username : "No User"}</Navbar.Text>
+        </Navbar>
     )
 }
 

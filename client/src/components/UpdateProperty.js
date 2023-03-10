@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 function UpdateProperty({ onUpdateProperty }) {
     const navigate = useNavigate();
@@ -90,7 +91,7 @@ function UpdateProperty({ onUpdateProperty }) {
                     <label>Image URL: </label>
                     <input type="url" id="image_url" name="image_url" placeholder="Image URL" value={image_url} onChange={handleChange} />
                 </div>
-                <button type="submit" className="button">Update</button>
+                <Button type="submit" className="small-button" size="sm" >Update</Button>
             </form>
             {/* {errors?<h2>{errors}</h2>:null} */}
         </div>

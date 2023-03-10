@@ -1,9 +1,12 @@
+import Card from 'react-bootstrap/Card';
+
 function FavoriteCard( {address, user, created_at}) {
     return (
-        <div className="favorite-card">
-            <h3>{user.username} liked the property at {address} on {created_at}</h3>
+        <Card style={{margin:"5px"}}>
+            <h5>{user.username} liked the property at {address}</h5>
+            <p>On {created_at}</p>
             <p>Contact: {user.email} {user.phone}</p>
-        </div>
+        </Card>
     )
 }
 
